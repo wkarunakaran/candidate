@@ -1,0 +1,36 @@
+package com.company.participant;
+
+import com.company.service.ParticipantService;
+import com.company.utils.InputValidator;
+import com.company.model.Participant;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        ParticipantService service = new ParticipantService();
+        Scanner scanner = new Scanner(System.in);
+
+        // Gather participant details from the user
+        System.out.println("Enter Participant Name:");
+        String name = scanner.nextLine();
+
+        System.out.println("Enter Theory Mark 1 (out of 40):");
+        int theoryMark1 = InputValidator.validateMark(scanner.nextInt(), 40);
+
+        System.out.println("Enter Theory Mark 2 (out of 40):");
+        int theoryMark2 = InputValidator.validateMark(scanner.nextInt(), 40);
+
+        System.out.println("Enter Practical Mark 1 (out of 60):");
+        int practicalMark1 = InputValidator.validateMark(scanner.nextInt(), 60);
+
+        System.out.println("Enter Practical Mark 2 (out of 60):");
+        int practicalMark2 = InputValidator.validateMark(scanner.nextInt(), 60);
+
+        System.out.println("Does the participant have a Sports Quota? (YES/NO):");
+        String sportsQuota = scanner.next();
+
+        // Create participant and calculate the score
+        Participant participant = service.createParticipant(name, theoryMark1, theoryMark2, practicalMark1, practicalMark2, sportsQuota);
+        service.insertParticipantIntoDB(participant);
+    }
+}
