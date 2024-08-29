@@ -1,0 +1,25 @@
+package com.company.model;
+
+public class Participant {
+    private String participantID;
+    private String name;
+    private int theoryMark1;
+    private int theoryMark2;
+    private int practicalMark1;
+    private int practicalMark2;
+    private boolean hasSportsQuota;
+    private int totalMarks;
+    private String result;
+
+    // Getters and Setters
+    public String getParticipantID() {
+        return participantID;
+    }
+
+    public void setParticipantID(String participantID) {
+        this.participantID = participantID;
+    }
+
+    // Additional Getters and Setters
+    // ... rest of the code for getters/setters
+}
