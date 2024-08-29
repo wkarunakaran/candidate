@@ -1,0 +1,42 @@
+package com.company.participant;
+
+import com.company.model.Participant;
+import com.company.service.ParticipantService;
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Participant Management System");
+
+        // Input details
+        System.out.print("Enter Participant Name: ");
+        String name = scanner.nextLine();
+
+        System.out.print("Enter Theory Mark 1 (out of 40): ");
+        int theory1 = scanner.nextInt();
+
+        System.out.print("Enter Theory Mark 2 (out of 40): ");
+        int theory2 = scanner.nextInt();
+
+        System.out.print("Enter Practical Mark 1 (out of 60): ");
+        int practical1 = scanner.nextInt();
+
+        System.out.print("Enter Practical Mark 2 (out of 60): ");
+        int practical2 = scanner.nextInt();
+
+        System.out.print("Sports Quota (YES/NO): ");
+        String sportsQuota = scanner.next();
+
+        // Create Participant object
+        Participant participant = new Participant(name, theory1, theory2, practical1, practical2, sportsQuota);
+
+        // Process and Insert Participant
+        ParticipantService service = new ParticipantService();
+        service.processParticipant(participant);
+
+        scanner.close();
+    }
+}
