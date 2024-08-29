@@ -1,0 +1,35 @@
+package com.company.service;
+
+import com.company.model.Participant;
+import com.company.dao.ParticipantDAO;
+import com.company.utils.StringUtils;
+import com.company.constants.AppConstants;
+
+public class ParticipantService {
+
+    public Participant createParticipant(String name, int theoryMark1, int theoryMark2, int practicalMark1, int practicalMark2, String sportsQuota) {
+        Participant participant = new Participant();
+        participant.setParticipantID(StringUtils.generateParticipantID());
+        participant.setName(name);
+        participant.setTheoryMark1(theoryMark1);
+        participant.setTheoryMark2(theoryMark2);
+        participant.setPracticalMark1(practicalMark1);
+        participant.setPracticalMark2(practicalMark2);
+        participant.setHasSportsQuota(sportsQuota.equalsIgnoreCase("YES"));
+
+        // Calculate total and result
+        int totalMarks = (theoryMark1 + theoryMark2) / 2 + (practicalMark1 + practicalMark2) / 2;
+        participant.setTotalMarks(totalMarks);
+
+        String result = participant.isHasSportsQuota() ? (totalMarks >= AppConstants.SPORTS_QUOTA_PASS_MARK ? "PASS" : "FAIL") : 
+                                                         (totalMarks >= AppConstants.NON_SPORTS_PASS_MARK ? "PASS" : "FAIL");
+        participant.setResult(result);
+
+        return participant;
+    }
+
+    public void insertParticipantIntoDB(Participant participant) {
+        ParticipantDAO dao = new ParticipantDAO();
+        dao.insertParticipant(participant);
+    }
+}
