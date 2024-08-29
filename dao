@@ -1,0 +1,30 @@
+package com.company.dao;
+
+import com.company.database.DBConnection;
+import com.company.model.Participant;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+public class ParticipantDAO {
+    public void insertParticipant(Participant participant) {
+        try (Connection conn = DBConnection.getConnection()) {
+            String sql = "INSERT INTO PARTICIPANT_TABLE (ParticipantID, ParticipantName, TheoryMark1, TheoryMark2, PracticalMark1, PracticalMark2, TotalMarks, Result) " +
+                         "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setString(1, participant.getParticipantID());
+            statement.setString(2, participant.getName());
+            statement.setInt(3, participant.getTheoryMark1());
+            statement.setInt(4, participant.getTheoryMark2());
+            statement.setInt(5, participant.getPracticalMark1());
+            statement.setInt(6, participant.getPracticalMark2());
+            statement.setInt(7, participant.getTotalMarks());
+            statement.setString(8, participant.getResult());
+
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}
