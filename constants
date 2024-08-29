@@ -1,0 +1,6 @@
+package com.company.constants;
+
+public class AppConstants {
+    public static final int SPORTS_QUOTA_PASS_MARK = 70;
+    public static final int NON_SPORTS_PASS_MARK = 75;
+}
